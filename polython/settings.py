@@ -48,6 +48,7 @@ HOUSE_APPS = [
 
 VENDOR_APPS = [
     'admin_honeypot',
+    'corsheaders',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + HOUSE_APPS + VENDOR_APPS
@@ -56,6 +57,7 @@ INSTALLED_APPS = DJANGO_APPS + HOUSE_APPS + VENDOR_APPS
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -83,6 +85,31 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'polython.wsgi.application'
 
+
+CORS_ORIGIN_WHITELIST = (
+    'null'
+)
+
+CORS_ALLOW_HEADERS = (
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+)
+
+CORS_ALLOW_METHODS = (
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+)
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
