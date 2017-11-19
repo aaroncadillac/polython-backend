@@ -56,7 +56,7 @@ class UserStores(View):
             pass
 
         if stores is not None:
-            return JsonResponse([{'id': store.pk.__str__(), 'name': store.name} for store in stores])
+            return JsonResponse([{'id': store.pk.__str__(), 'name': store.name} for store in stores], safe=False)
         else:
             return JsonResponse({
                 'error': 'User has not stores.'
@@ -102,7 +102,7 @@ class CreateStore(View):
         store.save()
         return JsonResponse({
             'id': store.pk.__str__()
-        })
+        }, safe=False)
 
     def dispatch(self, *args, **kwargs):
         return super(CreateStore, self).dispatch(*args, **kwargs)
