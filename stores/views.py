@@ -51,7 +51,7 @@ class UserStores(View):
 
         stores = None
         try:
-            stores = Store.objects.get(owner=self.request.user)
+            stores = Store.objects.filter(owner=self.request.user)
         except Exception as e:
             pass
 
