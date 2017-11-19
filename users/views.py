@@ -23,11 +23,17 @@ class LoginUser(View):
 		password = self.request_data['password']
 		user = authenticate(request, username=username, password=password)
 
+		response = None
+
 		if user is not None:
 			login(request, user)
-			return JsonResponse({'msg': 'ok'})
+			response = JsonResponse({'msg': 'ok'})
+			response['Access-Control-Allow-Origin'] = '*'
+			return response
 		else:
-			return JsonResponse({'msg': 'error'})
+			response = JsonResponse({'msg': 'error'})
+			response['Access-Control-Allow-Origin'] = '*'
+			return response
 		return super(LoginUser, self).get(request, *args, **kwargs)
 
 	def dispatch(self, *args, **kwargs):
