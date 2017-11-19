@@ -31,6 +31,8 @@ ALLOWED_HOSTS = ['polython.herokuapp.com']
 
 # Application definition
 
+# These are the Django built-in apps, some third party and custom ones.
+
 DJANGO_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -85,6 +87,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'polython.wsgi.application'
 
+
+# These settings are used to support CORS integration
 
 CORS_ORIGIN_WHITELIST = (
     'null'
@@ -149,6 +153,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Email configurations
+# These settings support the email integration with sendgrid
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.sendgrid.net'

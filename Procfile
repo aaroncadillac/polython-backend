@@ -1,1 +1,1 @@
-web: gunicorn polython.wsgi
+web: gunicorn -w1 polython.wsgi

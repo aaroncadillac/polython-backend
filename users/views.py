@@ -12,10 +12,14 @@ import json
 
 @method_decorator(csrf_exempt, name='dispatch')
 class LoginUser(View):
+	"""
+	This view handles user login
+	"""
 
 	request_data = None
 
 	def post(self, request, *args, **kwargs):
+		"""This method handles requests made by POST method"""
 
 		self.request_data = json.loads(self.request.body)
 		
@@ -43,7 +47,10 @@ class LoginUser(View):
 @method_decorator(login_required, name='dispatch')
 @method_decorator(csrf_exempt, name='dispatch')
 class UserDetail(View):
-	def get(self, request, pk, *args, **kwargs):		
+	def get(self, request, pk, *args, **kwargs):
+		"""
+		This method handles requests made by GET method
+		"""
 
 		user = None
 		try:
@@ -69,7 +76,15 @@ class UserDetail(View):
 @method_decorator(login_required, name='dispatch')
 @method_decorator(csrf_exempt, name='dispatch')
 class ListUsers(View):
+	"""
+	This view lists users. Because this is a MVP pagination
+	is not supported... yet :)
+	"""
+
 	def get(self, request, *args, **kwargs):
+		"""
+		This method handles requests made by GET method
+		"""
 
 		users = [{
 			'id': user.pk.__str__(),
@@ -86,10 +101,22 @@ class ListUsers(View):
 
 @method_decorator(csrf_exempt, name='dispatch')
 class CreateUser(View):
+	"""
+	This view creates users. It is done by the JSON object it receives
+	with the correct parameters.
+	"""
 	
 	request_data = None
 
 	def post(self, request, *args, **kwargs):
+		"""
+		This method handles post methods, as the other above :)
+		"""
+
+		# Maybe you are interested in the line below and you're wondering
+		# why this is showed in this way. The answer is simple.
+		# self.request.body is the raw body stream, but we want it as JSON
+		# so, json.loads parses it to a python dict type to handle it easier.
 
 		self.request_data = json.loads(self.request.body)
 
