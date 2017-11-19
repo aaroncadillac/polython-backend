@@ -13,6 +13,9 @@ import json
 @method_decorator(login_required, name='dispatch')
 @method_decorator(csrf_exempt, name='dispatch')
 class StoreDetail(View):
+    """
+    This view shows store details.
+    """
     
     def get(self, request, pk, *args, **kwargs):
 
@@ -35,6 +38,32 @@ class StoreDetail(View):
 
     def dispatch(self, *args, **kwargs):
         return super(StoreDetail, self).dispatch(*args, **kwargs)
+
+
+@method_decorator(login_required, name='dispatch')
+@method_decorator(csrf_exempt, name='dispatch')
+class UserStores(View):
+    """
+    This view shows user stores.
+    """
+    
+    def get(self, request, *args, **kwargs):
+
+        stores = None
+        try:
+            stores = Store.objects.get(owner=self.request.user)
+        except Exception as e:
+            pass
+
+        if stores is not None:
+            return JsonResponse([{'id': store.pk.__str__(), 'name': store.name} for store in stores])
+        else:
+            return JsonResponse({
+                'error': 'User has not stores.'
+            })
+
+    def dispatch(self, *args, **kwargs):
+        return super(UserStores, self).dispatch(*args, **kwargs)
 
 
 @method_decorator(login_required, name='dispatch')
