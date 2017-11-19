@@ -111,6 +111,10 @@ CORS_ALLOW_METHODS = (
     'PUT',
 )
 
+CORS_URLS_REGEX = r'^/*/.*$'
+CORS_ORIGIN_ALLOW_ALL = True
+
+
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
